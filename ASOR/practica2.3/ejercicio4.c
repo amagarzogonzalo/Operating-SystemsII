@@ -1,0 +1,193 @@
+/*
+-f     Do full-format listing. 
+-u userlist
+Select by effective user ID (EUID) or name.  This selects the processes whose effective
+user name or ID is in userlist.
+-e     Select all processes.  Identical to -A.
+
+¿Identificadores que comparten la shell y los programas que se ejecutan en ella?
+sh-4.2# ps -ejH
+Vemos en formato árbol y observamos que dcomparten el PID, PGID
+
+sh-4.2# ps -ejH
+  PID  PGID   SID TTY          TIME CMD
+    2     0     0 ?        00:00:00 kthreadd
+    3     0     0 ?        00:00:00   ksoftirqd/0
+    5     0     0 ?        00:00:00   kworker/0:0H
+    6     0     0 ?        00:00:00   kworker/u2:0
+    7     0     0 ?        00:00:00   migration/0
+    8     0     0 ?        00:00:00   rcu_bh
+    9     0     0 ?        00:00:01   rcu_sched
+   10     0     0 ?        00:00:00   lru-add-drain
+   11     0     0 ?        00:00:00   watchdog/0
+   13     0     0 ?        00:00:00   kdevtmpfs
+   14     0     0 ?        00:00:00   netns
+   15     0     0 ?        00:00:00   khungtaskd
+   16     0     0 ?        00:00:00   writeback
+   17     0     0 ?        00:00:00   kintegrityd
+   18     0     0 ?        00:00:00   bioset
+   19     0     0 ?        00:00:00   bioset
+   20     0     0 ?        00:00:00   bioset
+   21     0     0 ?        00:00:00   kblockd
+   22     0     0 ?        00:00:00   md
+   23     0     0 ?        00:00:00   edac-poller
+   29     0     0 ?        00:00:02   kswapd0
+   30     0     0 ?        00:00:00   ksmd
+   31     0     0 ?        00:00:00   khugepaged
+   32     0     0 ?        00:00:00   crypto
+   40     0     0 ?        00:00:00   kthrotld
+   42     0     0 ?        00:00:00   kmpath_rdacd
+   43     0     0 ?        00:00:00   kaluad
+   44     0     0 ?        00:00:00   kpsmoused
+   45     0     0 ?        00:00:00   ipv6_addrconf
+   59     0     0 ?        00:00:00   deferwq
+   90     0     0 ?        00:00:00   kauditd
+  267     0     0 ?        00:00:00   ata_sff
+  272     0     0 ?        00:00:00   scsi_eh_0
+  274     0     0 ?        00:00:00   scsi_tmf_0
+  275     0     0 ?        00:00:00   scsi_eh_1
+  276     0     0 ?        00:00:00   scsi_tmf_1
+  277     0     0 ?        00:00:00   scsi_eh_2
+  280     0     0 ?        00:00:00   scsi_tmf_2
+  311     0     0 ?        00:00:00   kworker/0:1H
+  352     0     0 ?        00:00:00   kdmflush
+  353     0     0 ?        00:00:00   bioset
+  363     0     0 ?        00:00:00   kdmflush
+  364     0     0 ?        00:00:00   bioset
+  376     0     0 ?        00:00:00   bioset
+  377     0     0 ?        00:00:00   xfsalloc
+  378     0     0 ?        00:00:00   xfs_mru_cache
+  379     0     0 ?        00:00:00   xfs-buf/dm-0
+  380     0     0 ?        00:00:00   xfs-data/dm-0
+  381     0     0 ?        00:00:00   xfs-conv/dm-0
+  382     0     0 ?        00:00:00   xfs-cil/dm-0
+  383     0     0 ?        00:00:00   xfs-reclaim/dm-
+  384     0     0 ?        00:00:00   xfs-log/dm-0
+  385     0     0 ?        00:00:00   xfs-eofblocks/d
+  386     0     0 ?        00:00:01   xfsaild/dm-0
+  605     0     0 ?        00:00:00   iprt-VBoxWQueue
+  654     0     0 ?        00:00:00   ttm_swap
+  706     0     0 ?        00:00:00   xfs-buf/sda1
+  707     0     0 ?        00:00:00   xfs-data/sda1
+  708     0     0 ?        00:00:00   xfs-conv/sda1
+  709     0     0 ?        00:00:00   xfs-cil/sda1
+  710     0     0 ?        00:00:00   xfs-reclaim/sda
+  711     0     0 ?        00:00:00   xfs-log/sda1
+  712     0     0 ?        00:00:00   xfs-eofblocks/s
+  713     0     0 ?        00:00:00   xfsaild/sda1
+  742     0     0 ?        00:00:00   rpciod
+  743     0     0 ?        00:00:00   xprtiod
+ 3319     0     0 ?        00:00:00   kworker/u2:1
+11119     0     0 ?        00:00:00   kworker/0:1
+11532     0     0 ?        00:00:00   kworker/0:2
+11664     0     0 ?        00:00:00   kworker/0:0
+11722     0     0 ?        00:00:00   kworker/0:3
+    1     1     1 ?        00:00:00 systemd
+  457   457   457 ?        00:00:00   systemd-journal
+  482   482   482 ?        00:00:00   lvmetad
+  492   492   492 ?        00:00:00   systemd-udevd
+  745   745   745 ?        00:00:00   auditd
+  747   747   747 ?        00:00:00     audispd
+  749   747   747 ?        00:00:00       sedispatch
+  772   772   772 ?        00:00:00   ModemManager
+  774   774   774 ?        00:00:00   dbus-daemon
+  780   780   780 ?        00:00:00   rpcbind
+  803   803   803 ?        00:00:00   udisksd
+  804   804   804 ?        00:00:00   rngd
+  805   805   805 ?        00:00:00   smartd
+  807   807   807 ?        00:00:00   accounts-daemon
+  809   809   809 ?        00:00:00   abrtd
+  810   810   810 ?        00:00:00   abrt-watch-log
+  812   812   812 ?        00:00:00   alsactl
+  820   820   820 ?        00:00:00   systemd-logind
+  822   822   822 ?        00:00:00   lsmd
+  828   828   828 ?        00:00:00   abrt-watch-log
+  829   829   829 ?        00:00:00   polkitd
+  832   832   832 ?        00:00:00   rtkit-daemon
+  853   853   853 ?        00:00:00   gssproxy
+  855   854   854 ?        00:00:00   chronyd
+  869   845   845 ?        00:00:00   ksmtuned
+11739   845   845 ?        00:00:00     sleep
+  936   936   936 ?        00:00:00   mcelog
+ 1049  1049  1049 ?        00:00:00   cupsd
+ 1050  1050  1050 ?        00:00:00   sshd
+ 1052  1052  1052 ?        00:00:00   tuned
+ 1054  1054  1054 ?        00:00:00   rsyslogd
+ 1064  1064  1064 ?        00:00:00   atd
+ 1065  1065  1065 ?        00:00:00   crond
+ 1147  1147  1147 ?        00:00:00   master
+ 1148  1147  1147 ?        00:00:00     pickup
+ 1149  1147  1147 ?        00:00:00     qmgr
+ 1325  1325  1325 ?        00:00:00   gdm
+ 1352  1352  1352 tty1     00:00:55     X
+ 1365  1325  1325 ?        00:00:00     gdm-session-wor
+ 1370  1370  1370 ?        00:00:01       openbox
+ 1578  1578  1578 ?        00:00:00         ssh-agent
+ 1343  1341  1341 ?        00:00:01   VBoxService
+ 1379  1370  1370 ?        00:00:00   dbus-launch
+ 1380  1380  1380 ?        00:00:00   dbus-daemon
+ 1448  1380  1380 ?        00:00:00   imsettings-daem
+ 1452  1380  1380 ?        00:00:00   gvfsd
+ 1457  1380  1380 ?        00:00:00   gvfsd-fuse
+ 1545  1543  1543 ?        00:00:00   VBoxClient
+ 1547  1543  1543 ?        00:00:00     VBoxClient
+ 1556  1553  1553 ?        00:00:00   VBoxClient
+ 1557  1553  1553 ?        00:00:00     VBoxClient
+ 1561  1558  1558 ?        00:00:00   VBoxClient
+ 1563  1558  1558 ?        00:00:00     VBoxClient
+ 1565  1564  1564 ?        00:00:00   VBoxClient
+ 1567  1564  1564 ?        00:00:08     VBoxClient
+ 1618  1370  1370 ?        00:00:01   tint2
+ 2688  2688  2688 ?        00:00:56     code
+ 2690  2688  2688 ?        00:00:00       code
+ 2789  2688  2688 ?        00:00:03         code
+ 3891  2688  2688 ?        00:01:23         code
+ 3909  2688  2688 ?        00:00:08           code
+ 3939  2688  2688 ?        00:00:02             Microsoft.VSCod
+ 3975  2688  2688 ?        00:00:01               Microsoft.VSCod
+11175  2688  2688 ?        00:00:00               Microsoft.VSCod
+11623  2688  2688 ?        00:00:00               Microsoft.VSCod
+ 3910  2688  2688 ?        00:00:00           code
+ 1897  1370  1370 ?        00:00:00   applet.py
+ 1898  1370  1370 ?        00:00:00   nm-applet
+ 1900  1370  1370 ?        00:00:00   abrt-applet
+ 2075  1380  1380 ?        00:00:00   dconf-service
+ 2082  1380  1380 ?        00:00:00   at-spi-bus-laun
+ 2087  1380  1380 ?        00:00:00     dbus-daemon
+ 2090  2089  2089 ?        00:00:00   pulseaudio
+ 2095  1380  1380 ?        00:00:00   at-spi2-registr
+ 2119  1380  1380 ?        00:00:00   xdg-desktop-por
+ 2124  1380  1380 ?        00:00:00   xdg-document-po
+ 2128  1380  1380 ?        00:00:00   xdg-permission-
+ 2140  1380  1380 ?        00:00:00   xdg-desktop-por
+ 2601  1380  1380 ?        00:00:00   gconfd-2
+ 2979  1380  1380 ?        00:00:16   gnome-terminal-
+ 2986  1380  1380 ?        00:00:00     gnome-pty-helpe
+ 2987  2987  2987 pts/0    00:00:00     bash
+ 3435  3435  2987 pts/0    00:00:00       sudo
+ 3436  3435  2987 pts/0    00:00:15         gedit
+ 3049  3049  3049 pts/1    00:00:00     bash
+11159 11159  3049 pts/1    00:00:00       sudo
+11160 11160  3049 pts/1    00:00:00         sh
+11760 11760  3049 pts/1    00:00:00           ps
+ 3182  1380  1380 ?        00:00:00   gvfs-udisks2-vo
+ 3187  1380  1380 ?        00:00:00   gvfs-afc-volume
+ 3193  1380  1380 ?        00:00:00   gvfs-gphoto2-vo
+ 3198  1380  1380 ?        00:00:00   gvfs-mtp-volume
+ 3203  1380  1380 ?        00:00:00   gvfs-goa-volume
+ 3207  1380  1380 ?        00:00:00   goa-daemon
+ 3215  1380  1380 ?        00:00:00   goa-identity-se
+ 3223  1380  1380 ?        00:00:00   mission-control
+ 3225  1380  1380 ?        00:00:00   gvfsd-trash
+ 3246  1380  1380 ?        00:00:00   gvfsd-network
+ 3260  1380  1380 ?        00:00:00   gvfsd-dnssd
+ 3442  3435  2987 pts/0    00:00:00   dbus-launch
+ 3443  3443  3443 ?        00:00:00   dbus-daemon
+ 3445  3443  3443 ?        00:00:00   xdg-desktop-por
+ 3450  3443  3443 ?        00:00:00   xdg-document-po
+ 3454  3443  3443 ?        00:00:00   xdg-permission-
+ 3465  3443  3443 ?        00:00:00   xdg-desktop-por
+ 3471  3443  3443 ?        00:00:00   dconf-service
+ 3552  3552  3552 ?        00:00:00   anacron
+ 3841  3841  3841 ?        00:00:00   dhclient
+*/
